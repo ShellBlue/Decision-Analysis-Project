@@ -1,27 +1,27 @@
 ﻿Name,Restaurant ID,Distance (km) from Yuntech,Category,Price Range,Street Location Type,Surrounding Environment,Foot Traffic Level,Vehicle Access,Parking Availability,Visibility from main road,Building Type,Signboard Distinctiveness,Storefront Size,Competition Density,Accessibility Score,Operational Hours,Review Count,Reviews
 Carouce Café,R001,0,Cafe,2,Campus Street,Campus Area,1,0,0,1,Standalone,1,1,0,0,0,804,4.1
-肉嘞斗六店,R002,0,Barbeque Restaurant,0,Main Road,Residental and Campus Area,0,1,0,1,Ground-floor shop,1,0,2,1,1,71,4.1
-鐵男自助餐,R003,0,Chinese Restaurant,0,Main Road,Residental,0,1,0,0,Ground-floor shop,2,0,2,1,0,103,3.9
-Hong Ya Hamburger,R004,0,Breakfast Restaurant,0,Main Road,Residental and Campus Area,0,0,0,0,Ground-floor shop,1,0,2,1,2,87,3.3
-傳香飯糰(雲科店),R005,0,Brunch Restaurant,0,Main Road,Residental and Campus Area,0,0,0,0,Ground-floor shop,1,0,2,1,2,172,3.6
-蚵仔之家,R006,0,Restaurant,0,Main Road,Residental and Campus Area,0,0,0,0,Ground-floor shop,1,0,0,1,3,268,4.7
-晶品早午餐,R007,0,Restaurant,0,Main Road,Residental and Campus Area,0,1,0,0,Ground-floor shop,1,0,2,1,2,112,4.4
-花路米美食坊,R008,0,Restaurant,0,Main Road,Residental and Campus Area,0,1,0,1,Ground-floor shop,2,0,2,1,4,209,4.5
-廖家蒸餃,R009,0,Asian Restaurant,0,Main Road,Residental and Campus Area,0,1,0,1,Ground-floor shop,2,0,2,1,1,180,4.8
-即食樂焗烤美食,R010,0,Italian Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,1,0,0,1,1,236,4.3
-斗六北方鍋貼小籠包,R011,1,Deli,0,Main Road,Residental and Campus Area,0,1,0,1,Ground-floor shop,2,0,2,1,5,24,4.2
-家香古早味,R012,1,Rice Restaurant,0,Main Road,Residental,0,1,0,1,Ground-floor shop,2,0,2,1,5,219,4.4
-阿男滷肉飯,R013,1,Restaurant,0,Main Road,Residental,0,1,0,1,Ground-floor shop,1,0,2,1,1,136,4.1
-炸雞大獅,R014,1,Fast Food Restaurant,0,Main Road,Residental,0,1,0,0,Ground-floor shop,1,0,0,1,4,185,4.2
-灶腳 爌肉飯,R015,1,Mandarin Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,2,0,2,1,1,17,4.8
-大江戶日本料理,R016,1,Japanese Restaurant,1,Main Road,Residental,0,1,0,1,Ground-floor shop,1,0,0,1,1,423,4.3
-傻師傅湯包,R017,1,Taiwanese Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,1,0,2,1,1,42,4.1
-烹小鮮麵館,R018,1,Asian Restaurant,0,Alley,Residental,1,1,0,2,Ground-floor shop,2,0,2,1,0,2453,4.6
-韓手作,R019,1,Korean Restaurant,0,Main Road,Residental,1,1,0,1,Ground-floor shop,1,0,0,1,0,3646,4.9
-早安有喜,R020,1,Brunch Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,1,0,2,1,2,303,4
-鼎鏨牛排館,R021,1,Steak House,1,Main Road,Commercial,0,0,1,1,Standalone,0,1,1,1,1,614,4.4
-圓粥率廣東粥,R022,1,Meal Delivery,0,Main Road,Commercial,0,1,0,1,Ground-floor shop,1,0,2,1,0,113,4
-板塊牛排斗六店,R023,1,Chophouse Restaurant,1,Main Road,Commercial,0,1,0,1,Ground-floor shop,1,1,1,1,0,871,4.2
-KFC,R024,1,Fast Food Restaurant,1,Main Road,Commercial,0,0,0,0,Standalone,0,0,0,1,4,2549,4.1
-McDonald's,R025,2,Fast Food Restaurant,0,Main Road,Commercial,0,0,1,0,Standalone,0,2,0,0,6,3793,4.1
-高稼庄花枝羹麵,R026,2,Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,1,1,2,1,4,3258,4.9
+肉嘞斗六店,R002,1,Barbeque Restaurant,0,Main Road,Residental and Campus Area,0,1,0,1,Ground-floor shop,1,0,2,1,1,71,4.1
+鐵男自助餐,R003,1,Chinese Restaurant,0,Main Road,Residental,0,1,0,0,Ground-floor shop,2,0,2,1,0,103,3.9
+Hong Ya Hamburger,R004,2,Breakfast Restaurant,0,Main Road,Residental and Campus Area,0,0,0,0,Ground-floor shop,1,0,2,1,2,87,3.3
+傳香飯糰(雲科店),R005,3,Brunch Restaurant,0,Main Road,Residental and Campus Area,0,0,0,0,Ground-floor shop,1,0,2,1,2,172,3.6
+蚵仔之家,R006,3,Restaurant,0,Main Road,Residental and Campus Area,0,0,0,0,Ground-floor shop,1,0,0,1,3,268,4.7
+晶品早午餐,R007,4,Restaurant,0,Main Road,Residental and Campus Area,0,1,0,0,Ground-floor shop,1,0,2,1,2,112,4.4
+花路米美食坊,R008,5,Restaurant,0,Main Road,Residental and Campus Area,0,1,0,1,Ground-floor shop,2,0,2,1,4,209,4.5
+廖家蒸餃,R009,6,Asian Restaurant,0,Main Road,Residental and Campus Area,0,1,0,1,Ground-floor shop,2,0,2,1,1,180,4.8
+即食樂焗烤美食,R010,6,Italian Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,1,0,0,1,1,236,4.3
+斗六北方鍋貼小籠包,R011,9,Deli,0,Main Road,Residental and Campus Area,0,1,0,1,Ground-floor shop,2,0,2,1,5,24,4.2
+家香古早味,R012,9,Rice Restaurant,0,Main Road,Residental,0,1,0,1,Ground-floor shop,2,0,2,1,5,219,4.4
+阿男滷肉飯,R013,9,Restaurant,0,Main Road,Residental,0,1,0,1,Ground-floor shop,1,0,2,1,1,136,4.1
+炸雞大獅,R014,9,Fast Food Restaurant,0,Main Road,Residental,0,1,0,0,Ground-floor shop,1,0,0,1,4,185,4.2
+灶腳 爌肉飯,R015,9,Mandarin Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,2,0,2,1,1,17,4.8
+大江戶日本料理,R016,10,Japanese Restaurant,1,Main Road,Residental,0,1,0,1,Ground-floor shop,1,0,0,1,1,423,4.3
+傻師傅湯包,R017,10,Taiwanese Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,1,0,2,1,1,42,4.1
+烹小鮮麵館,R018,11,Asian Restaurant,0,Alley,Residental,1,1,0,2,Ground-floor shop,2,0,2,1,0,2453,4.6
+韓手作,R019,11,Korean Restaurant,0,Main Road,Residental,1,1,0,1,Ground-floor shop,1,0,0,1,0,3646,4.9
+早安有喜,R020,11,Brunch Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,1,0,2,1,2,303,4
+鼎鏨牛排館,R021,12,Steak House,1,Main Road,Commercial,0,0,1,1,Standalone,0,1,1,1,1,614,4.4
+圓粥率廣東粥,R022,13,Meal Delivery,0,Main Road,Commercial,0,1,0,1,Ground-floor shop,1,0,2,1,0,113,4
+板塊牛排斗六店,R023,13,Chophouse Restaurant,1,Main Road,Commercial,0,1,0,1,Ground-floor shop,1,1,1,1,0,871,4.2
+KFC,R024,14,Fast Food Restaurant,1,Main Road,Commercial,0,0,0,0,Standalone,0,0,0,1,4,2549,4.1
+McDonald's,R025,15,Fast Food Restaurant,0,Main Road,Commercial,0,0,1,0,Standalone,0,2,0,0,6,3793,4.1
+高稼庄花枝羹麵,R026,15,Restaurant,0,Alley,Residental,1,1,0,1,Ground-floor shop,1,1,2,1,4,3258,4.9

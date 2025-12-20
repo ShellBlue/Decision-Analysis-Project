@@ -36,8 +36,10 @@ ord_ = [
 ]
 
 nom = [
-    "Category", "Building Type",
-    "Street Location Type", "Surrounding Environment"
+    "Category",
+    "Building Type",
+    "Street Location Type", 
+    "Surrounding Environment"
 ]
 
 # ============================================================
