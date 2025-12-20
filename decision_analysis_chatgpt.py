@@ -135,7 +135,7 @@ decision_matrix = np.array([
     for row in decision_df.values
 ])
 
-_, _, Q, ranking = fuzzy_vikor_method(
+S, R, Q, ranking = fuzzy_vikor_method(
     decision_matrix, fuzzy_weights, criteria_type
 )
 
@@ -156,6 +156,18 @@ results["Q"] = Q
 results["Rank"] = ranking
 
 # ============================================================
+# Defuzzify S and R
+# ============================================================
+S = np.asarray(S, dtype=float)
+R = np.asarray(R, dtype=float)
+
+if S.ndim == 2:
+    S = S.mean(axis=1)
+
+if R.ndim == 2:
+    R = R.mean(axis=1)
+
+# ============================================================
 # Optimal restaurant
 # ============================================================
 best_idx = results["Q"].idxmin()
@@ -164,27 +176,71 @@ optimal = results.loc[best_idx]
 print("\nOptimal restaurant alternative (UTILITY PROFILE):")
 print(optimal)
 
+def vikor_sr_plot(S, R, Q, labels):
+    plt.figure(figsize=(6, 6))
+    sc = plt.scatter(S, R, c=Q, s=120, edgecolor="black")
+
+    for i, lbl in enumerate(labels):
+        plt.text(S[i], R[i], str(lbl), fontsize=9, ha="right", va="bottom")
+
+    plt.xlabel("S (Group Utility)")
+    plt.ylabel("R (Individual Regret)")
+    plt.title("VIKOR S–R Compromise Plot")
+    plt.colorbar(sc, label="Q (lower = better)")
+    plt.grid(alpha=0.3)
+    plt.show()
+
+
 # ============================================================
 # Visualization: Restaurant rankings
 # ============================================================
 ranked = results.sort_values("Q")
 
-plt.figure()
-plt.bar(range(len(ranked)), ranked["Q"])
-plt.xlabel("Restaurants (sorted)")
+vikor_sr_plot(
+    S,
+    R,
+    Q,
+    results["Restaurant ID"]
+)
+
+
+plt.figure(figsize=(10, 4))
+plt.bar(
+    ranked["Restaurant ID"].astype(str),
+    ranked["Q"]
+)
+plt.xticks(rotation=90)
 plt.ylabel("VIKOR Q (lower = better)")
 plt.title("Restaurant Rankings (FVIKOR)")
+plt.grid(axis="y", alpha=0.3)
 plt.show()
+
 
 # Top 10
 top10 = ranked.head(10)
 
-plt.figure()
-plt.barh( top10["Restaurant ID"], top10["Q"])
+plt.figure(figsize=(6, 4))
+plt.barh(
+    top10["Restaurant ID"].astype(str),
+    top10["Q"]
+)
 plt.gca().invert_yaxis()
 plt.xlabel("VIKOR Q")
 plt.title("Top 10 Restaurant Locations")
 plt.show()
+
+plt.figure(figsize=(6, 3))
+plt.plot(
+    range(1, len(ranked) + 1),
+    ranked["Q"],
+    marker="o"
+)
+plt.xlabel("Rank position")
+plt.ylabel("Q value")
+plt.title("Q Gap Analysis (VIKOR Stability)")
+plt.grid(alpha=0.3)
+plt.show()
+
 
 # ============================================================
 # Visualization: Criterion importance
