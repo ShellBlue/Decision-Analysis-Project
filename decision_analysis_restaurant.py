@@ -14,15 +14,16 @@ from sklearn.pipeline import Pipeline
 from pyDecision.algorithm.fuzzy_ahp import fuzzy_ahp_method
 from pyDecision.algorithm.fuzzy_vikor import fuzzy_vikor_method
 
+
 # ============================================================
 # Load data
 # ============================================================
 df = pd.read_csv("Restaurant Manual Encoded.csv")
 
-              
-ID_col = df["Restaurant ID"]           # identifier (kept for interpretation)
-y = df["Reviews"]                      # target
-X = df.drop(columns=["Name","Restaurant ID", "Reviews"])
+ID_col = df["Restaurant ID"]          # identifier (kept for interpretation)
+y = df["Reviews"]                     # target
+X = df.drop(columns=["Name", "Restaurant ID", "Reviews"])
+
 
 # ============================================================
 # Feature groups
@@ -30,20 +31,27 @@ X = df.drop(columns=["Name","Restaurant ID", "Reviews"])
 num = ["Review Count"]
 
 ord_ = [
-    "Distance (km) from Yuntech", "Price Range", "Foot Traffic Level",
-    "Accessibility Score", "Visibility from main road", "Storefront Size",
-    "Signboard Distinctiveness", "Competition Density", "Operational Hours"
+    "Distance (km) from Yuntech",
+    "Price Range",
+    "Foot Traffic Level",
+    "Accessibility Score",
+    "Visibility from main road",
+    "Storefront Size",
+    "Signboard Distinctiveness",
+    "Competition Density",
+    "Operational Hours"
 ]
 
 nom = [
     "Category",
     "Building Type",
-    "Street Location Type", 
+    "Street Location Type",
     "Surrounding Environment"
 ]
 
+
 # ============================================================
-# Regression model (importance extraction)
+# ML STAGE: Regression-based importance learning
 # ============================================================
 preprocess = ColumnTransformer([
     ("num", RobustScaler(), num),
@@ -61,8 +69,9 @@ model.fit(X, y)
 coefs = model.named_steps["reg"].coef_
 names = model.named_steps["prep"].get_feature_names_out()
 
+
 # ============================================================
-# Utility matrix construction
+# ML STAGE: Utility matrix construction
 # ============================================================
 def minmax(df_):
     return (df_ - df_.min()) / (df_.max() - df_.min())
@@ -83,23 +92,29 @@ for c in nom:
 
 nom_util = minmax(nom_util)
 
+
 # ============================================================
-# Final decision matrix
+# Decision matrix (post-ML)
 # ============================================================
 decision_df = pd.concat([num_util, ord_util, nom_util], axis=1)
 criteria = decision_df.columns.tolist()
+
 
 # ============================================================
 # Criterion types
 # ============================================================
 criteria_type = [
-    "cost" if c in ["Distance (km) from Yuntech", "Price Range", "Competition Density"]
-    else "benefit"
+    "cost" if c in [
+        "Distance (km) from Yuntech",
+        "Price Range",
+        "Competition Density"
+    ] else "benefit"
     for c in criteria
 ]
 
+
 # ============================================================
-# Regression → criterion weights
+# ML → Criterion weights (|β|)
 # ============================================================
 crit_w = defaultdict(float)
 
@@ -113,11 +128,15 @@ for n, c in zip(names, coefs):
 w_ml = np.array([crit_w[c] for c in criteria])
 w_ml /= w_ml.sum()
 
+
 # ============================================================
-# FAHP
+# FMCDM STAGE: FAHP
 # ============================================================
 n = len(criteria)
-pcm = np.array([[[w_ml[i] / w_ml[j]] * 3 for j in range(n)] for i in range(n)])
+pcm = np.array([
+    [[w_ml[i] / w_ml[j]] * 3 for j in range(n)]
+    for i in range(n)
+])
 
 fahp = fuzzy_ahp_method(pcm)[0]
 w_fahp = np.array([(l + m + u) / 3 for l, m, u in fahp])
@@ -127,21 +146,25 @@ fuzzy_weights = [[
     [0.9 * w, w, 1.1 * w] for w in w_fahp
 ]]
 
+
 # ============================================================
-# FVIKOR decision matrix
+# FMCDM STAGE: FVIKOR decision matrix
 # ============================================================
 decision_matrix = np.array([
     [[0.9 * v, v, 1.1 * v] for v in row]
     for row in decision_df.values
 ])
 
-
 S, R, Q, ranking = fuzzy_vikor_method(
-    decision_matrix, fuzzy_weights, criteria_type, graph=False
+    decision_matrix,
+    fuzzy_weights,
+    criteria_type,
+    graph=False
 )
 
+
 # ============================================================
-# Defuzzify & align
+# Defuzzification & alignment
 # ============================================================
 Q = np.asarray(Q, dtype=float)
 if Q.ndim == 2:
@@ -156,9 +179,6 @@ results["Restaurant ID"] = ID_col
 results["Q"] = Q
 results["Rank"] = ranking
 
-# ============================================================
-# Defuzzify S and R
-# ============================================================
 S = np.asarray(S, dtype=float)
 R = np.asarray(R, dtype=float)
 
@@ -168,6 +188,7 @@ if S.ndim == 2:
 if R.ndim == 2:
     R = R.mean(axis=1)
 
+
 # ============================================================
 # Optimal restaurant
 # ============================================================
@@ -176,6 +197,7 @@ optimal = results.loc[best_idx]
 
 print("\nOptimal restaurant alternative (UTILITY PROFILE):")
 print(optimal)
+
 
 def vikor_sr_plot(S, R, Q, labels):
     plt.figure(figsize=(6, 6))
@@ -205,12 +227,12 @@ vikor_sr_plot(
     results["Restaurant ID"]
 )
 
-
 plt.figure(figsize=(10, 4))
 plt.bar(
     ranked["Restaurant ID"].astype(str),
     ranked["Q"]
 )
+
 plt.xticks(rotation=90)
 plt.ylabel("VIKOR Q (lower = better)")
 plt.title("Restaurant Rankings (FVIKOR)")
@@ -241,6 +263,7 @@ plt.plot(
 )
 plt.xlabel("Rank position")
 plt.ylabel("Q value")
+plt.yscale("log")
 plt.title("Q Gap Analysis (VIKOR Stability)")
 plt.grid(alpha=0.3)
 plt.tight_layout()
@@ -259,6 +282,7 @@ importance_df = pd.DataFrame({
 plt.figure()
 plt.barh(importance_df["Criterion"], importance_df["FAHP Weight"])
 plt.xlabel("Weight")
+plt.xscale("log")
 plt.title("Criterion Importance (FAHP)")
 plt.tight_layout()
 plt.show()
@@ -266,6 +290,7 @@ plt.show()
 plt.figure()
 plt.barh(importance_df["Criterion"], importance_df["ML Weight (|β|)"])
 plt.xlabel("Weight")
+plt.xscale("log")
 plt.title("Criterion Importance (ML)")
 plt.tight_layout()
 plt.show()
