@@ -53,7 +53,7 @@ preprocess = ColumnTransformer([
 
 model = Pipeline([
     ("prep", preprocess),
-    ("reg", Ridge(alpha=1.0))
+    ("reg", Ridge())
 ])
 
 model.fit(X, y)
