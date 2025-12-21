@@ -3,9 +3,9 @@
 # ============================================================
 import pandas as pd
 import numpy as np
-from collections import defaultdict
 import matplotlib.pyplot as plt
 
+from collections import defaultdict
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
 from sklearn.linear_model import Ridge
@@ -135,8 +135,9 @@ decision_matrix = np.array([
     for row in decision_df.values
 ])
 
+
 S, R, Q, ranking = fuzzy_vikor_method(
-    decision_matrix, fuzzy_weights, criteria_type
+    decision_matrix, fuzzy_weights, criteria_type, graph=False
 )
 
 # ============================================================
@@ -178,7 +179,7 @@ print(optimal)
 
 def vikor_sr_plot(S, R, Q, labels):
     plt.figure(figsize=(6, 6))
-    sc = plt.scatter(S, R, c=Q, s=120, edgecolor="black")
+    sc = plt.scatter(S, R, s=120, c=Q, edgecolor="black")
 
     for i, lbl in enumerate(labels):
         plt.text(S[i], R[i], str(lbl), fontsize=9, ha="right", va="bottom")
@@ -188,6 +189,7 @@ def vikor_sr_plot(S, R, Q, labels):
     plt.title("VIKOR S–R Compromise Plot")
     plt.colorbar(sc, label="Q (lower = better)")
     plt.grid(alpha=0.3)
+    plt.tight_layout()
     plt.show()
 
 
@@ -213,6 +215,7 @@ plt.xticks(rotation=90)
 plt.ylabel("VIKOR Q (lower = better)")
 plt.title("Restaurant Rankings (FVIKOR)")
 plt.grid(axis="y", alpha=0.3)
+plt.tight_layout()
 plt.show()
 
 
@@ -227,6 +230,7 @@ plt.barh(
 plt.gca().invert_yaxis()
 plt.xlabel("VIKOR Q")
 plt.title("Top 10 Restaurant Locations")
+plt.tight_layout()
 plt.show()
 
 plt.figure(figsize=(6, 3))
@@ -239,6 +243,7 @@ plt.xlabel("Rank position")
 plt.ylabel("Q value")
 plt.title("Q Gap Analysis (VIKOR Stability)")
 plt.grid(alpha=0.3)
+plt.tight_layout()
 plt.show()
 
 
@@ -255,10 +260,12 @@ plt.figure()
 plt.barh(importance_df["Criterion"], importance_df["FAHP Weight"])
 plt.xlabel("Weight")
 plt.title("Criterion Importance (FAHP)")
+plt.tight_layout()
 plt.show()
 
 plt.figure()
 plt.barh(importance_df["Criterion"], importance_df["ML Weight (|β|)"])
 plt.xlabel("Weight")
 plt.title("Criterion Importance (ML)")
+plt.tight_layout()
 plt.show()
